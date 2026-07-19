@@ -14,9 +14,7 @@ The code is intended for reproducible exploratory modelling, not for clinical di
 ├── requirements.txt
 └── modules/
     ├── data_preprocessing.py
-    ├── model_training.py
-    ├── evaluation_visualization.py
-    └── advanced_interpretability.py
+    └── model_training.py
 ```
 
 ## Input Files
@@ -47,8 +45,6 @@ Rows must be matched across all omics matrices and the label file.
 ```bash
 pip install -r requirements.txt
 ```
-
-The local reproducibility check used the `ai` conda environment. See `REPRODUCIBILITY.md` for the verified package versions and reference results.
 
 ## Run Training
 
