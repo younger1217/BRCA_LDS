@@ -1,7 +1,7 @@
 """Configuration for MOGAT model training and Gradient SHAP analysis."""
 
 config = {
-    "data_path": "data/processed_multiomics",
+    "data_path": "Data/Data_preprocessed",
     "output_dir": "results/mogat_internal_cv",
     "num_classes": 2,
     "hidden_dim": 128,

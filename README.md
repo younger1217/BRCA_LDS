@@ -1,8 +1,7 @@
 # MOGAT for BC-LDS Multi-Omics Analysis
 
-This repository provides the code used for the internal MOGAT classification and Gradient SHAP interpretability analyses in the revised manuscript on breast cancer-associated Liver depression syndrome (BC-LDS).
+This repository provides the code used for the internal MOGAT classification and Gradient SHAP interpretability analyses on breast cancer-associated Liver depression syndrome (BC-LDS).
 
-The code is intended for reproducible exploratory modelling, not for clinical diagnosis or externally validated prediction.
 
 ## Repository Structure
 
@@ -10,8 +9,27 @@ The code is intended for reproducible exploratory modelling, not for clinical di
 .
 ├── 1_train_models.py
 ├── 2_gradient_shap_interpretability.py
+├── Data/
+│   ├── Data-origin-matrix/
+│   │   ├── gene_FPKM_matrix.csv
+│   │   ├── ProteinTable_matrix.csv
+│   │   └── metabolites_matrix.csv
+│   └── Data_preprocessed/
+│       ├── 1_tr.csv
+│       ├── 1_featname.csv
+│       ├── 2_tr.csv
+│       ├── 2_featname.csv
+│       ├── 3_tr.csv
+│       ├── 3_featname.csv
+│       ├── labels_tr.csv
+│       └── labels_tr_4class.csv
 ├── example_config.py
+├── RELEASE_MANIFEST.md
 ├── requirements.txt
+├── reproducibility/
+│   ├── README.md
+│   ├── raw_leakage_free_nested_cv.py
+│   └── raw_leakage_free_permutation_test.py
 └── modules/
     ├── data_preprocessing.py
     └── model_training.py
@@ -19,7 +37,8 @@ The code is intended for reproducible exploratory modelling, not for clinical di
 
 ## Input Files
 
-Place the processed multi-omics input files in `data/processed_multiomics/` or provide another path with `--data-path`.
+Processed multi-omics input files are included in `Data/Data_preprocessed/`.
+You can provide another path with `--data-path`.
 
 ```text
 1_tr.csv          transcriptomic matrix
@@ -46,6 +65,8 @@ Rows must be matched across all omics matrices and the label file.
 pip install -r requirements.txt
 ```
 
+The local reproducibility check used the package versions listed in `requirements.txt`.
+
 ## Run Training
 
 ```bash
@@ -55,7 +76,7 @@ python 1_train_models.py --config example_config.py
 With explicit paths:
 
 ```bash
-python 1_train_models.py --config example_config.py --data-path /path/to/processed_multiomics --output-dir results/mogat_internal_cv
+python 1_train_models.py --config example_config.py --data-path /path/to/Data_preprocessed --output-dir results/mogat_internal_cv
 ```
 
 Main outputs:
@@ -86,3 +107,9 @@ results/mogat_internal_cv/gradient_shap_interpretability/shap_beeswarm_top30_hq.
 ## Notes
 
 This public release contains only the MOGAT internal classification and Gradient SHAP interpretation workflow corresponding to the manuscript. Raw clinical or omics data are not included; users should place the processed matrices in the expected input format before running the scripts.
+
+Leakage-free validation scripts are provided in `reproducibility/`. These
+scripts start from the original full feature matrices and apply zero
+substitution, filtering, ANOVA feature selection, scaling, and model training
+within the training folds only. See `RELEASE_MANIFEST.md` for the minimum files
+recommended for the versioned public release.
