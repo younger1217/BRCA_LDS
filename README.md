@@ -106,7 +106,7 @@ results/mogat_internal_cv/gradient_shap_interpretability/shap_beeswarm_top30_hq.
 
 ## Notes
 
-This public release contains only the MOGAT internal classification and Gradient SHAP interpretation workflow corresponding to the manuscript. Raw clinical or omics data are not included; users should place the processed matrices in the expected input format before running the scripts.
+This public release contains only the MOGAT internal classification and Gradient SHAP interpretation workflow corresponding to the manuscript. 
 
 Leakage-free validation scripts are provided in `reproducibility/`. These
 scripts start from the original full feature matrices and apply zero
